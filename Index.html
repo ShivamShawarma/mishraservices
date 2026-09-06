@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mishra Services — Single-Point Residential & Workspace Transformation</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Outfit (Bold/Playful Headers) & DM Sans (Clean Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Outfit:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              blue: '#3176B1',     /* From Logo */
+              navy: '#163A5B',     /* From Logo */
+              orange: '#E77B27',   /* From Logo */
+              light: '#F4F6F8',    /* Soft off-white background */
+              white: '#FFFFFF',
+              dark: '#0B1215',
+              gray: '#64748B'
+            }
+          },
+          fontFamily: {
+            display: ['Outfit', 'sans-serif'],
+            sans: ['"DM Sans"', 'sans-serif'],
+          },
+          boxShadow: {
+            'soft': '0 20px 40px -15px rgba(22, 58, 91, 0.05)',
+            'hover': '0 30px 60px -15px rgba(231, 123, 39, 0.15)',
+          },
+          animation: {
+            'blob': 'blob 10s infinite',
+            'marquee': 'marquee 25s linear infinite',
+          },
+          keyframes: {
+            blob: {
+              '0%': { transform: 'translate(0px, 0px) scale(1)' },
+              '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+              '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+              '100%': { transform: 'translate(0px, 0px) scale(1)' }
+            },
+            marquee: {
+              '0%': { transform: 'translateX(0%)' },
+              '100%': { transform: 'translateX(-50%)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #F4F6F8;
+      color: #163A5B;
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+    
+    ::selection {
+      background: #E77B27;
+      color: #FFFFFF;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* Outcrowd style gradient text */
+    .text-gradient {
+      background: linear-gradient(135deg, #E77B27, #3176B1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F4F6F8;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3176B1;
+    }
+
+    /* Hide range slider default styling */
+    input[type=range]::-webkit-slider-thumb {
+      pointer-events: all;
+      width: 24px;
+      height: 24px;
+      -webkit-appearance: none;
+      @apply w-6 h-6 appearance-none pointer-events-auto rounded-full bg-brand-orange shadow-lg cursor-ew-resize;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-brand-orange selection:text-white relative">
+
+  <!-- Background Animated Blobs (Outcrowd Signature) -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-[-1]">
+    <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-brand-orange/20 rounded-full mix-blend-multiply filter blur-[100px] opacity-70 animate-blob"></div>
+    <div class="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-brand-blue/20 rounded-full mix-blend-multiply filter blur-[120px] opacity-70 animate-blob" style="animation-delay: 2s;"></div>
+    <div class="absolute bottom-[-20%] left-[20%] w-[700px] h-[700px] bg-brand-navy/10 rounded-full mix-blend-multiply filter blur-[150px] opacity-70 animate-blob" style="animation-delay: 4s;"></div>
+  </div>
+
+  <!-- ================= TOP NAVIGATION BAR ================= -->
+  <header class="fixed top-4 left-0 w-full z-50 transition-all duration-300 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto h-20 bg-white/80 backdrop-blur-xl rounded-[2rem] shadow-sm border border-white flex items-center justify-between px-6 sm:px-8">
+      
+      <!-- Brand Logo -->
+      <a href="#hero" class="flex items-center gap-3 group py-2">
+        <img src="LOGO_Cropped-removebg-preview.png" alt="Mishra Services Logo" class="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8 text-base font-medium text-brand-navy">
+        <a href="#about" class="hover:text-brand-orange transition-colors duration-200">About</a>
+        <a href="#services" class="hover:text-brand-orange transition-colors duration-200">Services</a>
+        <a href="#works" class="hover:text-brand-orange transition-colors duration-200">Transformations</a>
+        <a href="#estimator" class="hover:text-brand-orange transition-colors duration-200">Estimator</a>
+      </nav>
+
+      <!-- Action Button & Mobile Toggle -->
+      <div class="flex items-center gap-4">
+        <button onclick="openModal('quoteModal')" class="hidden sm:flex relative items-center justify-center px-7 py-3 text-sm font-bold text-white rounded-full bg-brand-navy hover:bg-brand-orange transition-all duration-300 shadow-lg hover:shadow-brand-orange/30 group overflow-hidden">
+          <span class="relative z-10 flex items-center gap-2">
+            Get an Estimate
+          </span>
+        </button>
+
+        <button onclick="toggleMobileMenu()" class="md:hidden text-brand-navy hover:text-brand-orange p-2" aria-label="Toggle Navigation">
+          <i data-lucide="menu" id="menuIcon" class="w-7 h-7"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobileMenu" class="hidden absolute top-24 left-4 right-4 bg-white rounded-[2rem] shadow-xl border border-gray-100 p-6 flex-col space-y-4">
+      <a href="#about" onclick="toggleMobileMenu()" class="block text-lg font-medium text-brand-navy hover:text-brand-orange py-2">About</a>
+      <a href="#services" onclick="toggleMobileMenu()" class="block text-lg font-medium text-brand-navy hover:text-brand-orange py-2">Services</a>
+      <a href="#works" onclick="toggleMobileMenu()" class="block text-lg font-medium text-brand-navy hover:text-brand-orange py-2">Transformations</a>
+      <a href="#estimator" onclick="toggleMobileMenu()" class="block text-lg font-medium text-brand-navy hover:text-brand-orange py-2">Cost Estimator</a>
+      <a href="#faq" onclick="toggleMobileMenu()" class="block text-lg font-medium text-brand-navy hover:text-brand-orange py-2">FAQ</a>
+      <button onclick="toggleMobileMenu(); openModal('quoteModal')" class="w-full text-center py-4 text-base font-bold bg-brand-orange text-white rounded-full shadow-lg">
+        Book Consultation
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ================= HERO SECTION ================= -->
+    <section id="hero" class="relative pt-40 pb-20 lg:pt-52 lg:pb-32 flex flex-col justify-center overflow-hidden">
+      <div class="max-w-7xl mx-auto px-6 sm:px-8 w-full relative z-10 text-center">
+        
+        <!-- Pill Tag -->
+        <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white text-sm font-bold text-brand-navy mb-8 shadow-sm border border-gray-100">
+          <span class="w-2.5 h-2.5 rounded-full bg-brand-orange animate-pulse"></span>
+          Delhi's Premium Gen-Z Service Partner
+        </div>
+
+        <!-- Giant Typography Header -->
+        <div class="max-w-5xl mx-auto space-y-4 mb-10">
+          <h1 class="font-display text-5xl sm:text-7xl lg:text-[5.5rem] font-black tracking-tight text-brand-navy leading-[1.05]">
+            Spaces transformed. <br />
+            <span class="text-gradient">Hassles eliminated.</span>
+          </h1>
+          <p class="text-brand-gray text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed mt-6">
+            We are Mishra Services. We bring fresh energy, tech-driven transparency, and uncompromising quality to your residential and workspace projects.
+          </p>
+        </div>
+
+        <!-- CTAs -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
+          <button onclick="openModal('quoteModal')" class="px-8 py-4 rounded-full bg-brand-orange hover:bg-brand-blue text-white text-base font-bold transition-all duration-300 shadow-xl hover:shadow-brand-blue/30 hover:-translate-y-1">
+            Book a Free Site Audit
+          </button>
+          <a href="#services" class="px-8 py-4 rounded-full bg-white text-brand-navy text-base font-bold transition-all duration-300 shadow-sm border border-gray-100 hover:shadow-lg flex items-center gap-2">
+            Explore Services
+            <i data-lucide="arrow-down" class="w-5 h-5 text-brand-blue"></i>
+          </a>
+        </div>
+
+        <!-- Image / Visual Element -->
+        <div class="mt-20 relative max-w-5xl mx-auto rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white">
+          <img src="http://googleusercontent.com/image_collection/image_retrieval/5488031446496256379_0" alt="Modern Team" class="w-full h-[400px] object-cover" />
+          <!-- Floating stats card -->
+          <div class="absolute bottom-6 left-6 bg-white/90 backdrop-blur-md p-5 rounded-3xl shadow-lg border border-white flex items-center gap-4">
+             <div class="w-12 h-12 rounded-full bg-brand-orange/10 flex items-center justify-center text-brand-orange">
+               <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+             </div>
+             <div>
+               <p class="font-display font-bold text-2xl text-brand-navy leading-none">4.9/5</p>
+               <p class="text-sm text-brand-gray font-medium mt-1">Delhi NCR Rating</p>
+             </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= VIBRANT MARQUEE TICKER ================= -->
+    <div class="py-8 bg-brand-navy overflow-hidden select-none transform -rotate-1 scale-110">
+      <div class="animate-marquee whitespace-nowrap text-2xl font-display font-bold uppercase text-white flex items-center">
+        <span class="mx-6 flex items-center gap-4"><span class="text-brand-orange">✦</span> SMART LIGHTING</span>
+        <span class="mx-6 flex items-center gap-4"><span class="text-brand-blue">✦</span> SEAMLESS PAINTING</span>
+        <span class="mx-6 flex items-center gap-4"><span class="text-brand-orange">✦</span> ADVANCED PLUMBING</span>
+        <span class="mx-6 flex items-center gap-4"><span class="text-brand-blue">✦</span> PRECISION HVAC</span>
+        <span class="mx-6 flex items-center gap-4"><span class="text-brand-orange">✦</span> TURNKEY HOME MAKEOVERS</span>
+        <span class="mx-6 flex items-center gap-4"><span class="text-brand-blue">✦</span> MODERN OFFICE RENOVATION</span>
+        <span class="mx-6 flex items-center gap-4"><span class="text-brand-orange">✦</span> CURATED CORPORATE GIFTS</span>
+        <!-- Duplicate for infinite loop -->
+        <span class="mx-6 flex items-center gap-4"><span class="text-brand-orange">✦</span> SMART LIGHTING</span>
+        <span class="mx-6 flex items-center gap-4"><span class="text-brand-blue">✦</span> SEAMLESS PAINTING</span>
+        <span class="mx-6 flex items-center gap-4"><span class="text-brand-orange">✦</span> ADVANCED PLUMBING</span>
+        <span class="mx-6 flex items-center gap-4"><span class="text-brand-blue">✦</span> PRECISION HVAC</span>
+        <span class="mx-6 flex items-center gap-4"><span class="text-brand-orange">✦</span> TURNKEY HOME MAKEOVERS</span>
+        <span class="mx-6 flex items-center gap-4"><span class="text-brand-blue">✦</span> MODERN OFFICE RENOVATION</span>
+        <span class="mx-6 flex items-center gap-4"><span class="text-brand-orange">✦</span> CURATED CORPORATE GIFTS</span>
+      </div>
+    </div>
+
+    <!-- ================= ABOUT ================= -->
+    <section id="about" class="py-24 sm:py-32 relative z-10 mt-10">
+      <div class="max-w-7xl mx-auto px-6 sm:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-20">
+          <h2 class="font-display text-4xl sm:text-5xl font-black text-brand-navy tracking-tight mb-6">
+            The Gen-Z standard for <br/> <span class="text-brand-blue">space transformation.</span>
+          </h2>
+          <p class="text-lg text-brand-gray">
+            We eliminate the chaos of coordinating 10 different contractors. You get one dedicated project manager, honest milestone billing, and exceptionally clean handovers.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Card 1 -->
+          <div class="bg-white p-8 rounded-[2rem] shadow-soft hover:shadow-hover hover:-translate-y-2 transition-all duration-300 border border-gray-100">
+            <div class="w-16 h-16 rounded-2xl bg-brand-blue text-white flex items-center justify-center mb-6 shadow-lg shadow-brand-blue/30">
+              <i data-lucide="layers" class="w-8 h-8"></i>
+            </div>
+            <h3 class="font-display font-bold text-2xl text-brand-navy mb-3">One Vendor</h3>
+            <p class="text-brand-gray leading-relaxed">
+              From electric lines to false ceilings, our internal teams work in perfect synchrony under one accountable roof.
+            </p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="bg-white p-8 rounded-[2rem] shadow-soft hover:shadow-hover hover:-translate-y-2 transition-all duration-300 border border-gray-100">
+            <div class="w-16 h-16 rounded-2xl bg-brand-orange text-white flex items-center justify-center mb-6 shadow-lg shadow-brand-orange/30">
+              <i data-lucide="clock" class="w-8 h-8"></i>
+            </div>
+            <h3 class="font-display font-bold text-2xl text-brand-navy mb-3">Zero Ghosting</h3>
+            <p class="text-brand-gray leading-relaxed">
+              We provide daily WhatsApp video logs, digitized billings, and strict timeline locks for phased handovers.
+            </p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="bg-white p-8 rounded-[2rem] shadow-soft hover:shadow-hover hover:-translate-y-2 transition-all duration-300 border border-gray-100">
+            <div class="w-16 h-16 rounded-2xl bg-brand-navy text-white flex items-center justify-center mb-6 shadow-lg shadow-brand-navy/30">
+              <i data-lucide="palette" class="w-8 h-8"></i>
+            </div>
+            <h3 class="font-display font-bold text-2xl text-brand-navy mb-3">Aesthetics</h3>
+            <p class="text-brand-gray leading-relaxed">
+              We know the difference between warm ambient cove lights and neutral LEDs. Our finishes respect modern architecture.
+            </p>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="bg-white p-8 rounded-[2rem] shadow-soft hover:shadow-hover hover:-translate-y-2 transition-all duration-300 border border-gray-100">
+            <div class="w-16 h-16 rounded-2xl bg-brand-blue text-white flex items-center justify-center mb-6 shadow-lg shadow-brand-blue/30">
+              <i data-lucide="file-check-2" class="w-8 h-8"></i>
+            </div>
+            <h3 class="font-display font-bold text-2xl text-brand-navy mb-3">Honest Rates</h3>
+            <p class="text-brand-gray leading-relaxed">
+              No confusing handwritten slips. Transparent estimates clearly distinguishing labor rates and genuine brand materials.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SERVICES SHOWCASE ================= -->
+    <section id="services" class="py-24 sm:py-32 bg-white relative rounded-[3rem] shadow-sm mx-4 sm:mx-8 z-10">
+      <div class="max-w-7xl mx-auto px-6 sm:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div class="max-w-xl">
+            <h2 class="font-display text-4xl sm:text-5xl font-black text-brand-navy tracking-tight mb-4">
+              Everything you need. <br/> <span class="text-brand-orange">In one place.</span>
+            </h2>
+            <p class="text-lg text-brand-gray">
+              Click on any service card below to explore our detailed scope of work, turnaround times, and materials used.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          
+          <!-- Service 1 -->
+          <div onclick="openServiceModal('lighting')" class="group cursor-pointer bg-brand-light p-8 rounded-[2.5rem] border-2 border-transparent hover:border-brand-blue/20 hover:bg-white hover:shadow-soft transition-all duration-300">
+            <div class="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">💡</div>
+            <h3 class="font-display text-2xl font-bold text-brand-navy mb-2 group-hover:text-brand-blue transition-colors">Lighting Installation</h3>
+            <p class="text-brand-blue font-bold text-sm uppercase tracking-wide mb-4">Smart & Architectural</p>
+            <p class="text-brand-gray leading-relaxed mb-6">Chandelier assembly, magnetic track lighting, concealed profiles, and smart home automation.</p>
+            <div class="flex items-center gap-2 text-brand-navy font-bold group-hover:text-brand-orange transition-colors">
+              Read More <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+            </div>
+          </div>
+
+          <!-- Service 2 -->
+          <div onclick="openServiceModal('painting')" class="group cursor-pointer bg-brand-light p-8 rounded-[2.5rem] border-2 border-transparent hover:border-brand-orange/20 hover:bg-white hover:shadow-soft transition-all duration-300">
+            <div class="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🎨</div>
+            <h3 class="font-display text-2xl font-bold text-brand-navy mb-2 group-hover:text-brand-orange transition-colors">Interior & Exterior Paint</h3>
+            <p class="text-brand-orange font-bold text-sm uppercase tracking-wide mb-4">Flawless Finishes</p>
+            <p class="text-brand-gray leading-relaxed mb-6">Limewash aesthetics, moisture damp-proofing, and mechanized airless spraying for perfectly smooth walls.</p>
+            <div class="flex items-center gap-2 text-brand-navy font-bold group-hover:text-brand-blue transition-colors">
+              Read More <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+            </div>
+          </div>
+
+          <!-- Service 3 -->
+          <div onclick="openServiceModal('plumbing')" class="group cursor-pointer bg-brand-light p-8 rounded-[2.5rem] border-2 border-transparent hover:border-brand-navy/20 hover:bg-white hover:shadow-soft transition-all duration-300">
+            <div class="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🔧</div>
+            <h3 class="font-display text-2xl font-bold text-brand-navy mb-2 group-hover:text-brand-navy transition-colors">Plumbing Services</h3>
+            <p class="text-brand-navy font-bold text-sm uppercase tracking-wide mb-4">Advanced Hydraulics</p>
+            <p class="text-brand-gray leading-relaxed mb-6">CPVC pipeline routing, booster pump setups, and luxury shower fixture alignments.</p>
+            <div class="flex items-center gap-2 text-brand-navy font-bold group-hover:text-brand-orange transition-colors">
+              Read More <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+            </div>
+          </div>
+
+          <!-- Service 4 -->
+          <div onclick="openServiceModal('ac')" class="group cursor-pointer bg-brand-light p-8 rounded-[2.5rem] border-2 border-transparent hover:border-brand-blue/20 hover:bg-white hover:shadow-soft transition-all duration-300">
+            <div class="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">❄️</div>
+            <h3 class="font-display text-2xl font-bold text-brand-navy mb-2 group-hover:text-brand-blue transition-colors">AC Install & Overhaul</h3>
+            <p class="text-brand-blue font-bold text-sm uppercase tracking-wide mb-4">Precision HVAC</p>
+            <p class="text-brand-gray leading-relaxed mb-6">Jet pump chemical cleaning, exact refrigerant charging, and vibration-free installations.</p>
+            <div class="flex items-center gap-2 text-brand-navy font-bold group-hover:text-brand-orange transition-colors">
+              Read More <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+            </div>
+          </div>
+
+          <!-- Service 5 -->
+          <div onclick="openServiceModal('home_reno')" class="group cursor-pointer bg-brand-light p-8 rounded-[2.5rem] border-2 border-transparent hover:border-brand-orange/20 hover:bg-white hover:shadow-soft transition-all duration-300">
+            <div class="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🏠</div>
+            <h3 class="font-display text-2xl font-bold text-brand-navy mb-2 group-hover:text-brand-orange transition-colors">Home Renovation</h3>
+            <p class="text-brand-orange font-bold text-sm uppercase tracking-wide mb-4">Turnkey Makeovers</p>
+            <p class="text-brand-gray leading-relaxed mb-6">Modular kitchens, Italian marble tiling, false ceilings, and comprehensive structural updates.</p>
+            <div class="flex items-center gap-2 text-brand-navy font-bold group-hover:text-brand-blue transition-colors">
+              Read More <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+            </div>
+          </div>
+
+          <!-- Service 6 -->
+          <div onclick="openServiceModal('office_reno')" class="group cursor-pointer bg-brand-light p-8 rounded-[2.5rem] border-2 border-transparent hover:border-brand-navy/20 hover:bg-white hover:shadow-soft transition-all duration-300">
+            <div class="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🏢</div>
+            <h3 class="font-display text-2xl font-bold text-brand-navy mb-2 group-hover:text-brand-navy transition-colors">Office Renovation</h3>
+            <p class="text-brand-navy font-bold text-sm uppercase tracking-wide mb-4">Ergonomic Workspaces</p>
+            <p class="text-brand-gray leading-relaxed mb-6">Acoustic meeting pods, collaborative zones, commercial carpet tiling, and access control.</p>
+            <div class="flex items-center gap-2 text-brand-navy font-bold group-hover:text-brand-orange transition-colors">
+              Read More <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+            </div>
+          </div>
+
+          <!-- Service 7: Corporate Gifting -->
+          <div onclick="openServiceModal('gifting')" class="group lg:col-span-3 cursor-pointer bg-gradient-to-br from-brand-navy to-[#0F2840] p-8 sm:p-12 rounded-[2.5rem] shadow-xl hover:shadow-brand-navy/30 transition-all duration-300 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div class="max-w-2xl text-left">
+              <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-white text-xs font-bold uppercase tracking-wider mb-6">
+                <span class="text-brand-orange">🎁</span> 07 Curated Division
+              </div>
+              <h3 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">Corporate Gifting & Hampers</h3>
+              <p class="text-white/80 text-lg leading-relaxed">
+                Elevated brand merchandise, handcrafted festival gift hampers, executive onboarding boxes, and premium Delhi-NCR logistics delivery.
+              </p>
+            </div>
+            <div class="flex-shrink-0">
+              <div class="w-16 h-16 rounded-full bg-brand-orange text-white flex items-center justify-center group-hover:scale-110 group-hover:bg-brand-blue transition-all">
+                <i data-lucide="arrow-right" class="w-8 h-8"></i>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= BEFORE & AFTER COMPARISON ================= -->
+    <section id="works" class="py-24 sm:py-32 relative z-10">
+      <div class="max-w-7xl mx-auto px-6 sm:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="font-display text-4xl sm:text-5xl font-black text-brand-navy tracking-tight mb-4">
+            See the difference.
+          </h2>
+          <p class="text-lg text-brand-gray">
+            Slide horizontally to preview how our unified lighting, flooring, and paint execution elevates outdated properties.
+          </p>
+        </div>
+
+        <div class="relative max-w-5xl mx-auto rounded-[3rem] overflow-hidden border-8 border-white shadow-2xl aspect-[16/10] sm:aspect-[16/9] select-none bg-brand-light" id="comparisonSliderContainer">
+          
+          <!-- After Image -->
+          <img 
+            src="after.jpg" 
+            alt="After Renovation" 
+            class="absolute inset-0 w-full h-full object-cover"
+          />
+          <div class="absolute bottom-6 right-6 z-10 px-6 py-2 rounded-full bg-white text-brand-navy font-bold shadow-lg">
+            After: Modern Finish
+          </div>
+
+          <!-- Before Image -->
+          <div id="beforeImageWrapper" class="absolute inset-0 w-1/2 overflow-hidden border-r-4 border-brand-orange">
+            <img 
+              src="before.jpg" 
+              alt="Before Renovation" 
+              class="absolute inset-0 w-full h-full object-cover max-w-none"
+              style="width: 100vw; max-width: 1024px;" 
+            />
+            <div class="absolute bottom-6 left-6 z-10 px-6 py-2 rounded-full bg-brand-navy text-white font-bold shadow-lg">
+              Before: Outdated
+            </div>
+          </div>
+
+          <!-- Slider Handle -->
+          <div id="sliderHandle" class="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-12 flex items-center justify-center cursor-ew-resize z-20 pointer-events-auto">
+            <div class="w-12 h-12 rounded-full bg-brand-orange text-white flex items-center justify-center shadow-xl border-4 border-white hover:scale-110 transition-transform">
+              <i data-lucide="chevrons-left-right" class="w-6 h-6"></i>
+            </div>
+          </div>
+
+          <!-- Invisible Range Input -->
+          <input type="range" min="0" max="100" value="50" id="sliderRange" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30" />
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= INTERACTIVE COST ESTIMATOR ================= -->
+    <section id="estimator" class="py-24 sm:py-32">
+      <div class="max-w-4xl mx-auto px-6 sm:px-8">
+        
+        <div class="bg-white p-8 sm:p-14 rounded-[3rem] shadow-xl border border-gray-100 relative overflow-hidden">
+          
+          <!-- Decorative blob inside card -->
+          <div class="absolute top-0 right-0 w-64 h-64 bg-brand-orange/5 rounded-full blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/2"></div>
+
+          <div class="relative z-10">
+            <div class="text-center mb-12">
+              <h2 class="font-display text-4xl font-black text-brand-navy mb-4">Project Budget Estimator</h2>
+              <p class="text-brand-gray text-lg">Transparent benchmark pricing for Delhi NCR.</p>
+            </div>
+
+            <!-- Step 1: Property Type -->
+            <div class="mb-10">
+              <label class="block text-sm font-bold text-brand-navy mb-4">1. Select Space Type</label>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <button type="button" onclick="setPropType(this, 'Apartment')" class="prop-btn py-4 px-6 rounded-2xl border-2 border-brand-blue bg-brand-blue/5 text-brand-blue font-bold text-lg transition-colors">
+                  Residential Flat
+                </button>
+                <button type="button" onclick="setPropType(this, 'Independent Villa')" class="prop-btn py-4 px-6 rounded-2xl border-2 border-gray-200 bg-white text-brand-gray hover:border-brand-blue/50 font-bold text-lg transition-colors">
+                  Villa / Kothi
+                </button>
+                <button type="button" onclick="setPropType(this, 'Commercial Office')" class="prop-btn py-4 px-6 rounded-2xl border-2 border-gray-200 bg-white text-brand-gray hover:border-brand-blue/50 font-bold text-lg transition-colors">
+                  Commercial Office
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 2: Carpet Area -->
+            <div class="mb-12">
+              <div class="flex justify-between items-end mb-4">
+                <label class="block text-sm font-bold text-brand-navy">2. Approximate Carpet Area</label>
+                <span id="areaDisplay" class="font-display font-bold text-3xl text-brand-orange">1,200 sq. ft.</span>
+              </div>
+              <div class="relative w-full h-4 bg-brand-light rounded-full mt-2">
+                <input 
+                  type="range" id="areaRange" min="300" max="5000" step="50" value="1200" 
+                  oninput="updateCalculation()" 
+                  class="absolute top-1/2 -translate-y-1/2 w-full h-full opacity-0 cursor-ew-resize z-20"
+                />
+                <!-- Custom track visual -->
+                <div id="sliderFill" class="absolute top-0 left-0 h-full bg-brand-orange rounded-full pointer-events-none" style="width: 19%;"></div>
+                <div id="sliderThumbVisual" class="absolute top-1/2 -translate-y-1/2 w-8 h-8 bg-white border-4 border-brand-orange rounded-full shadow-md pointer-events-none -ml-4" style="left: 19%;"></div>
+              </div>
+            </div>
+
+            <!-- Step 3: Services Checkboxes -->
+            <div class="mb-12">
+              <label class="block text-sm font-bold text-brand-navy mb-4">3. Services Required</label>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <label class="flex items-center gap-4 p-4 rounded-2xl border-2 border-gray-200 bg-white cursor-pointer hover:border-brand-orange/50 has-[:checked]:border-brand-orange has-[:checked]:bg-brand-orange/5 transition-colors">
+                  <input type="checkbox" id="srv_lighting" checked onchange="updateCalculation()" class="w-6 h-6 rounded text-brand-orange focus:ring-brand-orange focus:ring-2">
+                  <span class="font-bold text-brand-navy">💡 Smart Lighting</span>
+                </label>
+                <label class="flex items-center gap-4 p-4 rounded-2xl border-2 border-gray-200 bg-white cursor-pointer hover:border-brand-orange/50 has-[:checked]:border-brand-orange has-[:checked]:bg-brand-orange/5 transition-colors">
+                  <input type="checkbox" id="srv_paint" checked onchange="updateCalculation()" class="w-6 h-6 rounded text-brand-orange focus:ring-brand-orange focus:ring-2">
+                  <span class="font-bold text-brand-navy">🎨 Wall Painting</span>
+                </label>
+                <label class="flex items-center gap-4 p-4 rounded-2xl border-2 border-gray-200 bg-white cursor-pointer hover:border-brand-orange/50 has-[:checked]:border-brand-orange has-[:checked]:bg-brand-orange/5 transition-colors">
+                  <input type="checkbox" id="srv_plumbing" onchange="updateCalculation()" class="w-6 h-6 rounded text-brand-orange focus:ring-brand-orange focus:ring-2">
+                  <span class="font-bold text-brand-navy">🔧 Plumbing Upgrades</span>
+                </label>
+                <label class="flex items-center gap-4 p-4 rounded-2xl border-2 border-gray-200 bg-white cursor-pointer hover:border-brand-orange/50 has-[:checked]:border-brand-orange has-[:checked]:bg-brand-orange/5 transition-colors">
+                  <input type="checkbox" id="srv_ac" onchange="updateCalculation()" class="w-6 h-6 rounded text-brand-orange focus:ring-brand-orange focus:ring-2">
+                  <span class="font-bold text-brand-navy">❄️ AC Overhaul</span>
+                </label>
+                <label class="flex items-center gap-4 p-4 rounded-2xl border-2 border-gray-200 bg-white cursor-pointer hover:border-brand-orange/50 has-[:checked]:border-brand-orange has-[:checked]:bg-brand-orange/5 transition-colors sm:col-span-2">
+                  <input type="checkbox" id="srv_reno" onchange="updateCalculation()" class="w-6 h-6 rounded text-brand-orange focus:ring-brand-orange focus:ring-2">
+                  <span class="font-bold text-brand-navy">🏠 Full Turnkey Remodeling</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Total Result -->
+            <div class="p-8 rounded-[2rem] bg-brand-navy text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl">
+              <div>
+                <p class="text-brand-orange font-bold uppercase tracking-wide text-sm mb-2">Estimated Cost</p>
+                <p id="totalPrice" class="font-display text-4xl sm:text-5xl font-black">₹68,000 – ₹85,000</p>
+              </div>
+              <button onclick="openModal('quoteModal')" class="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-orange hover:bg-white hover:text-brand-navy text-white font-bold text-lg transition-all shadow-lg hover:shadow-xl">
+                Lock In Free Visit
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CTA BANNER ================= -->
+    <section class="py-32 bg-brand-blue relative overflow-hidden text-center rounded-[3rem] mx-4 sm:mx-8 shadow-2xl mb-24 z-10">
+      <div class="absolute inset-0 bg-[url('http://googleusercontent.com/image_collection/image_retrieval/17660166952204313819_0')] opacity-10 bg-cover bg-center mix-blend-overlay"></div>
+      
+      <div class="max-w-4xl mx-auto px-6 relative z-10">
+        <h2 class="font-display text-5xl sm:text-7xl font-black text-white mb-8 leading-tight">
+          Ready to build your next space without the headache?
+        </h2>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button onclick="openModal('quoteModal')" class="px-10 py-5 rounded-full bg-brand-orange text-white text-lg font-bold shadow-xl hover:scale-105 transition-transform">
+            Let's Talk Project
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-brand-navy pt-24 pb-12 text-white">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+        
+        <div class="md:col-span-2 space-y-6">
+          <div class="flex items-center gap-3">
+            <img src="LOGO_Cropped-removebg-preview.png" alt="Mishra Services Logo" class="h-14 w-auto object-contain bg-white/10 p-2 rounded-xl" />
+          </div>
+          <p class="text-white/70 max-w-sm text-lg leading-relaxed">
+            Delhi NCR’s premier Gen-Z led contractor network. We elevate residential homes and commercial workplaces.
+          </p>
+          <div class="flex items-center gap-4 pt-4">
+            <!-- Explicit Inline Instagram SVG -->
+            <a href="https://www.instagram.com/mishra_services_/" target="_blank" class="w-12 h-12 rounded-full bg-white/10 hover:bg-brand-orange flex items-center justify-center transition-colors" aria-label="Instagram">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            </a>
+            <!-- Explicit Inline Mail SVG -->
+            <a href="mailto:contact.mishraservices@gmail.com" class="w-12 h-12 rounded-full bg-white/10 hover:bg-brand-orange flex items-center justify-center transition-colors" aria-label="Email">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h5 class="font-display font-bold text-xl mb-6 text-brand-orange">Services</h5>
+          <ul class="space-y-4 text-white/80 font-medium">
+            <li><a href="#services" class="hover:text-white transition-colors">Lighting Install</a></li>
+            <li><a href="#services" class="hover:text-white transition-colors">Painting</a></li>
+            <li><a href="#services" class="hover:text-white transition-colors">Plumbing</a></li>
+            <li><a href="#services" class="hover:text-white transition-colors">AC Overhaul</a></li>
+            <li><a href="#services" class="hover:text-white transition-colors">Renovations</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 class="font-display font-bold text-xl mb-6 text-brand-orange">Reach Us</h5>
+          <address class="not-italic space-y-3 text-white/80 font-medium">
+            <p>Mishra Services HQ<br/>West Delhi, New Delhi</p>
+            <p class="text-white">contact.mishraservices@gmail.com</p>
+            <p class="font-display font-bold text-lg text-white pt-1">+91 96258 03685<br/>+91 96960 03685</p>
+          </address>
+        </div>
+
+      </div>
+
+      <div class="pt-8 border-t border-white/10 text-center text-white/50 font-medium">
+        <p>© 2026 Mishra Services LLP. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= INTERACTIVE SERVICE MODAL ================= -->
+  <div id="serviceModal" class="fixed inset-0 z-[100] hidden bg-brand-navy/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-[3rem] shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-8 sm:p-12 relative scale-95 opacity-0 transition-all duration-300" id="serviceModalInner">
+      <button onclick="closeModal('serviceModal')" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-brand-light text-brand-navy hover:bg-brand-orange hover:text-white flex items-center justify-center transition-colors">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+      <div id="serviceModalContent"></div>
+    </div>
+  </div>
+
+  <!-- ================= INQUIRY / ESTIMATE MODAL ================= -->
+  <div id="quoteModal" class="fixed inset-0 z-[100] hidden bg-brand-navy/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-[3rem] shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-8 sm:p-12 relative scale-95 opacity-0 transition-all duration-300" id="quoteModalInner">
+      <button onclick="closeModal('quoteModal')" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-brand-light text-brand-navy hover:bg-brand-orange hover:text-white flex items-center justify-center transition-colors">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+
+      <h3 class="font-display text-4xl font-black text-brand-navy mb-2">Let's talk.</h3>
+      <p class="text-brand-gray font-medium mb-8">Enter your details. Our team will reach out via WhatsApp within 2 hours.</p>
+
+      <form id="leadForm" onsubmit="handleFormSubmit(event)" class="space-y-5">
+        <div>
+          <label class="block text-sm font-bold text-brand-navy mb-2">Your Name</label>
+          <input required type="text" class="w-full px-6 py-4 rounded-2xl bg-brand-light border-2 border-transparent focus:border-brand-blue focus:bg-white focus:outline-none transition-colors text-brand-navy font-medium">
+        </div>
+        <div>
+          <label class="block text-sm font-bold text-brand-navy mb-2">WhatsApp Number</label>
+          <input required type="tel" class="w-full px-6 py-4 rounded-2xl bg-brand-light border-2 border-transparent focus:border-brand-blue focus:bg-white focus:outline-none transition-colors text-brand-navy font-medium">
+        </div>
+        <div>
+          <label class="block text-sm font-bold text-brand-navy mb-2">Service Needed</label>
+          <select class="w-full px-6 py-4 rounded-2xl bg-brand-light border-2 border-transparent focus:border-brand-blue focus:bg-white focus:outline-none transition-colors text-brand-navy font-medium appearance-none">
+            <option>Residential Remodel</option>
+            <option>Commercial Office</option>
+            <option>Specific Repairs</option>
+            <option>Corporate Gifting</option>
+          </select>
+        </div>
+        <button type="submit" class="w-full py-5 mt-4 rounded-2xl bg-brand-orange hover:bg-brand-blue text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all">
+          Send Request
+        </button>
+      </form>
+
+      <div id="formSuccess" class="hidden text-center py-12">
+        <div class="w-20 h-20 rounded-full bg-green-100 text-green-500 flex items-center justify-center mx-auto mb-6">
+          <i data-lucide="check" class="w-10 h-10"></i>
+        </div>
+        <h4 class="font-display text-3xl font-bold text-brand-navy mb-2">Got it!</h4>
+        <p class="text-brand-gray font-medium">We'll be in touch shortly.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    // Modal Logic with Animation
+    function openModal(id) {
+      const modal = document.getElementById(id);
+      const inner = id === 'serviceModal' ? document.getElementById('serviceModalInner') : document.getElementById('quoteModalInner');
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      // Trigger animation
+      setTimeout(() => {
+        inner.classList.remove('scale-95', 'opacity-0');
+        inner.classList.add('scale-100', 'opacity-100');
+      }, 10);
+    }
+
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      const inner = id === 'serviceModal' ? document.getElementById('serviceModalInner') : document.getElementById('quoteModalInner');
+      
+      inner.classList.remove('scale-100', 'opacity-100');
+      inner.classList.add('scale-95', 'opacity-0');
+      
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+      }, 300);
+    }
+
+    // Service Data Integration
+    const serviceData = {
+      lighting: { icon: '💡', title: 'Lighting Installation', desc: 'Magnetic low-voltage track lighting design & installation. Chandelier mounting and smart home automation (Philips Hue, Tuya).', time: '1 - 3 Days' },
+      painting: { icon: '🎨', title: 'Painting', desc: 'Detailed wall leveling and anti-damp moisture sealing primer. Mechanized airless spray painting for mirror-smooth surfaces.', time: '3 - 7 Days' },
+      plumbing: { icon: '🔧', title: 'Plumbing Services', desc: 'Concealed wall-hung WC installation, high-pressure booster pump integration, and luxury sanitaryware fittings.', time: 'Same day to 3 Days' },
+      ac: { icon: '❄️', title: 'AC Installation', desc: 'Jet-pump high-pressure foam deep cleaning, nitrogen leak testing, and custom copper piping concealment.', time: 'Same day' },
+      home_reno: { icon: '🏠', title: 'Home Renovation', desc: 'Full civil demolition, custom modular kitchens with Blum hardware, and Italian marble laying.', time: '2 - 6 Weeks' },
+      office_reno: { icon: '🏢', title: 'Office Renovation', desc: 'Acoustic conference rooms, ergonomic workstation clusters, and commercial-grade carpet tiles.', time: '2 - 4 Weeks' },
+      gifting: { icon: '🎁', title: 'Corporate Gifting', desc: 'Custom branded packaging, curated lifestyle tech, and doorstep pan-Delhi logistics management.', time: '5 - 10 Days' }
+    };
+
+    function openServiceModal(key) {
+      const data = serviceData[key];
+      if (!data) return;
+      document.getElementById('serviceModalContent').innerHTML = `
+        <div class="w-20 h-20 rounded-full bg-brand-light flex items-center justify-center text-4xl mb-6 shadow-sm border border-gray-100">${data.icon}</div>
+        <h3 class="font-display text-4xl font-black text-brand-navy mb-4">${data.title}</h3>
+        <p class="text-brand-gray text-lg leading-relaxed mb-8">${data.desc}</p>
+        <div class="bg-brand-blue/5 p-6 rounded-2xl border-l-4 border-brand-blue">
+          <span class="block text-brand-navy font-bold text-sm uppercase mb-1">Turnaround Time</span>
+          <span class="text-brand-blue font-display font-bold text-2xl">${data.time}</span>
+        </div>
+        <button onclick="closeModal('serviceModal'); openModal('quoteModal')" class="w-full mt-8 py-5 rounded-full bg-brand-orange text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all">Book Service</button>
+      `;
+      openModal('serviceModal');
+    }
+
+    // Slider Logic
+    const sliderRange = document.getElementById('sliderRange');
+    const beforeImg = document.getElementById('beforeImageWrapper');
+    const handle = document.getElementById('sliderHandle');
+    
+    sliderRange.addEventListener('input', (e) => {
+      beforeImg.style.width = `${e.target.value}%`;
+      handle.style.left = `${e.target.value}%`;
+    });
+
+    // Cost Estimator Logic
+    let currentPropType = 'Apartment';
+    function setPropType(button, type) {
+      currentPropType = type;
+      document.querySelectorAll('.prop-btn').forEach(btn => {
+        btn.classList.remove('border-brand-blue', 'bg-brand-blue/5', 'text-brand-blue');
+        btn.classList.add('border-gray-200', 'bg-white', 'text-brand-gray');
+      });
+      button.classList.remove('border-gray-200', 'bg-white', 'text-brand-gray');
+      button.classList.add('border-brand-blue', 'bg-brand-blue/5', 'text-brand-blue');
+      updateCalculation();
+    }
+
+    function updateCalculation() {
+      const val = document.getElementById('areaRange').value;
+      document.getElementById('areaDisplay').innerText = `${parseInt(val).toLocaleString()} sq. ft.`;
+      
+      // Update custom slider track visual
+      const percentage = ((val - 300) / (5000 - 300)) * 100;
+      document.getElementById('sliderFill').style.width = `${percentage}%`;
+      document.getElementById('sliderThumbVisual').style.left = `${percentage}%`;
+
+      let base = 0;
+      if (document.getElementById('srv_lighting').checked) base += val * 24;
+      if (document.getElementById('srv_paint').checked) base += val * 28;
+      if (document.getElementById('srv_plumbing').checked) base += 18000;
+      if (document.getElementById('srv_ac').checked) base += 12000;
+      if (document.getElementById('srv_reno').checked) base += val * 180;
+
+      let mult = currentPropType === 'Independent Villa' ? 1.2 : (currentPropType === 'Commercial Office' ? 1.15 : 1);
+      const min = Math.round((base * mult) / 1000) * 1000;
+      const max = Math.round((min * 1.25) / 1000) * 1000;
+
+      document.getElementById('totalPrice').innerText = min === 0 ? 'Select services' : `₹${min.toLocaleString()} – ₹${max.toLocaleString()}`;
+    }
+    updateCalculation();
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      document.getElementById('leadForm').classList.add('hidden');
+      document.getElementById('formSuccess').classList.remove('hidden');
+      setTimeout(() => {
+        closeModal('quoteModal');
+        setTimeout(() => {
+          document.getElementById('leadForm').reset();
+          document.getElementById('leadForm').classList.remove('hidden');
+          document.getElementById('formSuccess').classList.add('hidden');
+        }, 500);
+      }, 2500);
+    }
+    
+    function toggleMobileMenu() {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+      document.getElementById('mobileMenu').classList.toggle('flex');
+    }
+  </script>
+</body>
+</html>
