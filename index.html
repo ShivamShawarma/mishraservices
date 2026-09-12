@@ -662,7 +662,7 @@
           <i data-lucide="check" class="w-10 h-10"></i>
         </div>
         <h4 class="font-display text-3xl font-bold text-brand-navy mb-2">Got it!</h4>
-        <p class="text-brand-gray font-medium">We'll be in touch shortly via WhatsApp.</p>
+        <p class="text-brand-gray font-medium">Redirecting you to WhatsApp...</p>
       </div>
     </div>
   </div>
@@ -768,18 +768,30 @@
     }
     updateCalculation();
 
+    // WhatsApp Form Submission Handler Integration
     function handleFormSubmit(e) {
       e.preventDefault();
+      
+      const name = document.getElementById('fieldName').value;
+      const phone = document.getElementById('fieldPhone').value;
+      const service = document.getElementById('fieldService').value;
+
+      const message = `Hello Mishra Services! I want to request a quote or site audit.\n\n*Name:* ${name}\n*WhatsApp Number:* ${phone}\n*Service Needed:* ${service}`;
+      const encodedMessage = encodeURIComponent(message);
+      const whatsappNumber = "919625803685";
+
       document.getElementById('leadForm').classList.add('hidden');
       document.getElementById('formSuccess').classList.remove('hidden');
+
       setTimeout(() => {
+        window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
         closeModal('quoteModal');
         setTimeout(() => {
           document.getElementById('leadForm').reset();
           document.getElementById('leadForm').classList.remove('hidden');
           document.getElementById('formSuccess').classList.add('hidden');
         }, 500);
-      }, 2500);
+      }, 1500);
     }
     
     function toggleMobileMenu() {
